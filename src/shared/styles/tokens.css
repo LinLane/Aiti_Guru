@@ -1,0 +1,58 @@
+:root {
+  /* raw: radii */
+  --radius-sm: 6px;
+  --radius-pill: 34px;
+
+  /* raw: spacing */
+  --space-10: 10px;
+  --space-15: 15px;
+  --space-20: 20px;
+
+  /* raw: palette */
+  --blue-300: #367aff;
+  --blue-400: #797fea;
+  --blue-500: #242edb;
+  --blue-600: #141a81;
+
+  --white: #ffffff;
+  --black: #000000;
+  --red: #f11010;
+
+  --gray-100: #f3f3f3;
+  --gray-200: #ededed;
+  --gray-300: #c4c4c4;
+  --gray-500: #b2b3b9;
+
+  /* semantic: text */
+  --color-text-primary: var(--black);
+  --color-text-muted: var(--gray-500);
+  --color-text-on-accent: var(--white);
+  --color-text-disabled: var(--gray-300);
+
+  /* semantic: backgrounds */
+  --color-bg-page: var(--white);
+  --color-bg-surface: var(--white);
+  --color-bg-subtle: var(--gray-100);
+  --color-bg-accent: var(--blue-500);
+  --color-bg-accent-hover: var(--blue-600);
+  --color-bg-accent-soft: var(--blue-400);
+  --color-bg-disabled: var(--gray-200);
+
+  /* semantic: borders */
+  --color-border-primary: var(--gray-200);
+  --color-border-muted: var(--gray-100);
+  --color-border-accent: var(--blue-300);
+  --color-border-disabled: var(--gray-200);
+
+  /* semantic: feedback */
+  --color-danger: var(--red);
+
+  /* semantic: shape */
+  --control-radius: var(--radius-sm);
+  --control-radius-pill: var(--radius-pill);
+
+  /* compatibility aliases for early components */
+  --color-text-secondary: var(--color-text-on-accent);
+  --form-items-radius: var(--control-radius);
+  --box-radius: var(--control-radius-pill);
+}

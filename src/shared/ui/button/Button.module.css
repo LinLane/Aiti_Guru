@@ -1,0 +1,143 @@
+.button {
+  --button-bg: var(--color-bg-surface);
+  --button-bg-hover: var(--color-bg-subtle);
+  --button-text: var(--color-text-primary);
+  --button-border: var(--color-border-primary);
+  --button-radius: var(--control-radius);
+  --button-shadow-focus: 0 0 0 3px var(--color-border-accent);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-width: 0;
+  border: 1px solid var(--button-border);
+  border-radius: var(--button-radius);
+  background: var(--button-bg);
+  color: var(--button-text);
+
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--button-bg-hover);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--button-shadow-focus);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+  background: var(--color-bg-disabled);
+  border-color: var(--color-border-disabled);
+  box-shadow: none;
+}
+
+.button[data-size='sm'] {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.button[data-size='md'] {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 16px;
+}
+
+.button[data-size='lg'] {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: 18px;
+}
+
+.button[data-full-width='true'] {
+  width: 100%;
+}
+
+.button[data-shape='square'][data-size='sm'] {
+  width: 36px;
+  padding: 0;
+}
+
+.button[data-shape='square'][data-size='md'] {
+  width: 44px;
+  padding: 0;
+}
+
+.button[data-shape='square'][data-size='lg'] {
+  width: 48px;
+  padding: 0;
+}
+
+.button[data-variant='primary'] {
+  --button-bg: var(--color-bg-accent);
+  --button-bg-hover: var(--color-bg-accent-hover);
+  --button-text: var(--color-text-on-accent);
+  --button-border: transparent;
+}
+
+.button[data-variant='secondary'] {
+  --button-bg: var(--color-bg-surface);
+  --button-bg-hover: var(--color-bg-subtle);
+  --button-text: var(--color-text-primary);
+  --button-border: var(--color-border-primary);
+}
+
+.button[data-variant='ghost'] {
+  --button-bg: transparent;
+  --button-bg-hover: var(--color-bg-subtle);
+  --button-text: var(--color-text-primary);
+  --button-border: transparent;
+}
+
+.button[data-variant='pagination'] {
+  --button-bg: var(--color-bg-surface);
+  --button-bg-hover: var(--color-bg-subtle);
+  --button-text: var(--color-text-muted);
+  --button-border: var(--color-border-muted);
+
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: var(--control-radius);
+}
+
+.button[data-active='true'] {
+  --button-bg: var(--color-bg-accent-soft);
+  --button-text: var(--color-text-on-accent);
+  --button-border: transparent;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}
