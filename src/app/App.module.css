@@ -1,0 +1,11 @@
+.loadingRoot {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px;
+  color: var(--color-text-muted, #5c5f6b);
+  font-size: 16px;
+  line-height: 1.4;
+}

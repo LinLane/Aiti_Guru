@@ -1,8 +1,12 @@
-import AuthForm from "../../../widgets/auth/ui/AuthForm";
+import AuthForm from '../../../widgets/auth';
+import styles from './AuthPage.module.css';
 
 export default function AuthPage() {
-
-    return <>
-        <AuthForm/>
-    </>
+  return (
+    <main className={styles.page}>
+      <div className={styles.content}>
+        <AuthForm />
+      </div>
+    </main>
+  );
 }

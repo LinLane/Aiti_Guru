@@ -1,73 +1,226 @@
-# React + TypeScript + Vite
+# Aiti Guru — тестовое задание
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Реализованный функционал
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Страница авторизации
 
-## React Compiler
+* Реализована форма входа с использованием **access** и **refresh** токенов
+* Поддерживается чекбокс **«Запомнить данные»**:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  * если включен — сессия сохраняется после закрытия вкладки
+  * если выключен — требуется повторная авторизация
+* Поля формы проверяются на обязательное заполнение
+* Ошибки отображаются через **toast-уведомления**
 
-## Expanding the ESLint configuration
+### Страница товаров
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Реализована таблица товаров
+* Поддерживается:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+  * пагинация
+  * сортировка
+  * поиск товаров
+  * добавление нового товара
+* Добавление товара выполняется через диалоговое окно с формой
+* Обязательные поля валидируются
+* При успешном сохранении отображается **toast success**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Архитектурные решения и технические особенности
+
+### Design System
+
+Создана собственная **Design System**, включающая:
+
+* цветовую палитру
+* типографику
+* радиусы скругления
+
+### UI Kit
+
+На основе Design System реализован небольшой **UI Kit**.
+
+* Все компоненты проекта используют единый набор токенов
+* Для всех компонентов, кроме таблицы, созданы **stories для Storybook**
+
+### Таблица
+
+* Реализована на **TanStack Table**
+* Выбран headless-подход для гибкой интеграции с кастомной дизайн-системой
+* Состояние сортировки сохраняется в **localStorage**
+* После перезагрузки страницы сортировка восстанавливается
+
+### Управление состоянием
+
+Используется **Zustand**.
+
+Реализованы два независимых стора:
+
+* `authStore`
+* `productsStore`
+
+### Хранение сессии
+
+* Access token
+* Refresh token
+* Данные пользователя
+
+Хранятся:
+
+* в `sessionStorage`, если чекбокс **«Запомнить данные»** выключен
+* в `localStorage`, если чекбокс включен
+
+### Адаптивность
+
+Реализована адаптивная верстка:
+
+* desktop
+* tablet
+* mobile
+
+### Доступность (Accessibility)
+
+Доступность учтена во всей разметке:
+
+* корректные роли
+* aria-атрибуты
+
+### Поиск
+
+Для поиска реализовано:
+
+* debounce
+* отмена предыдущего запроса (AbortController)
+
+### Обработка ошибок и ErrorBoundary
+
+**Ошибки API и валидация форм** обрабатываются на уровне фич: сообщения пользователю выводятся через **toast** (см. страницы авторизации и товаров).
+
+**Необработанные ошибки рендера** в дереве React перехватываются **`ErrorBoundary`** 
+
+### Кеширование изображений
+
+Изображения товаров, полученные с CDN:
+
+```
+https://cdn.dummyjson.com
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+кешируются на уровне **Service Worker**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Используется стратегия: cache-first
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+
+---
+
+## Тестирование
+
+Реализовано:
+
+* unit-тесты компонентов
+* e2e-тест для критического сценария авторизации
+
+---
+
+## Инфраструктура
+
+* Dockerfile
+* CI для Pull Request в GitHub
+
+  * запуск линтеров
+  * запуск тестов
+
+---
+
+## Использование искусственного интеллекта
+
+При проектировании и реализации проекта использовался:
+
+**AI GPT-5.3 Codex** в рамках среды разработки **Cursor**.
+
+ИИ применялся как вспомогательный инструмент для ускорения разработки и решения отдельных технических задач.
+
+Основные области использования:
+
+* генерация unit-тестов
+* генерация stories для Storybook
+* анализ проблемы кеширования изображений через Service Worker
+
+Архитектурные решения, структура приложения и бизнес-логика были определены самостоятельно.
+
+---
+
+## Пример промпта для unit-тестов
+
 ```
+Нужно написать unit-тесты для UI-компонента Button с использованием:
+
+- Vitest
+- @testing-library/react
+- @testing-library/user-event
+
+Протестировать:
+
+1. Рендер кнопки по умолчанию
+2. Рендер текста и иконки одновременно
+3. Поведение кнопки только с иконкой
+4. Состояние loading
+5. Применение разных значений radius
+6. Состояние активной кнопки для варианта pagination
+7. Передача типа кнопки submit
+
+Использовать getByRole и понятные названия тестов
+```
+
+---
+
+## Пример промпта для Storybook
+
+```
+Нужно создать stories для Storybook на TypeScript.
+
+Варианты использования компонента:
+
+1. Primary кнопка
+   - текст
+   - большой размер
+   - fullWidth
+2. Secondary кнопка
+3. Кнопка с иконкой слева
+4. Демонстрация всех вариантов radius в одном примере
+5. Кнопка только с иконкой
+   - обязательно использовать aria-label
+6. Пример пагинации
+   - несколько кнопок
+   - одна активная
+7. Состояние disabled
+8. Состояние loading
+```
+
+---
+
+## Пример промпта для анализа проблемы кеширования изображений
+
+```
+Service Worker public/sw-images-cache.js работает не корректно.
+
+В Chrome DevTools → Network для каждого thumbnail.webp отображаются две записи:
+
+1. Type webp, Initiator Other, Size (ServiceWorker)
+2. Type fetch, Initiator sw-images-cache.js, реальный размер в kB
+
+После кеширования второй группы (сетевой fetch из Service Worker) не должно быть.
+
+Возможно это связано с промахом кеша.
+
+Необходимо:
+
+- проанализировать причину
+- объяснить поведение
+- предложить корректное решение
+```
+
+---
+

@@ -1,0 +1,27 @@
+.link {
+  color: var(--color-text-link);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  text-underline-offset: 2px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.link:hover {
+  color: var(--color-text-link-hover);
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-border-accent);
+  border-radius: 2px;
+}

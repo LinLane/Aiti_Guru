@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Button } from './Button';
+import styles from './Button.module.css';
 
 describe('Button', () => {
   it('renders with button type by default', () => {
@@ -11,8 +12,7 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Войти' });
 
     expect(button).toHaveAttribute('type', 'button');
-    expect(button).toHaveAttribute('data-variant', 'primary');
-    expect(button).toHaveAttribute('data-size', 'md');
+    expect(button).toHaveClass(styles.button, styles.primary, styles.md);
   });
 
   it('renders icons and label together', () => {
@@ -29,9 +29,8 @@ describe('Button', () => {
   it('marks icon-only buttons as square', () => {
     render(<Button leftIcon={<span>+</span>} aria-label="Добавить" />);
 
-    expect(screen.getByRole('button', { name: 'Добавить' })).toHaveAttribute(
-      'data-shape',
-      'square',
+    expect(screen.getByRole('button', { name: 'Добавить' })).toHaveClass(
+      styles.square,
     );
   });
 
@@ -49,11 +48,27 @@ describe('Button', () => {
 
     expect(button).toBeDisabled();
     expect(button).toHaveAttribute('aria-busy', 'true');
-    expect(button).toHaveAttribute('data-loading', 'true');
+    expect(button).toHaveClass(styles.loading);
 
     await user.click(button);
 
     expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  it('applies small radius class', () => {
+    render(<Button radius="sm">Маленький радиус</Button>);
+
+    expect(screen.getByRole('button', { name: 'Маленький радиус' })).toHaveClass(
+      styles.radiusSm,
+    );
+  });
+
+  it('applies large radius class', () => {
+    render(<Button radius="lg">Большой радиус</Button>);
+
+    expect(screen.getByRole('button', { name: 'Большой радиус' })).toHaveClass(
+      styles.radiusLg,
+    );
   });
 
   it('supports active pagination state', () => {
@@ -63,9 +78,9 @@ describe('Button', () => {
       </Button>,
     );
 
-    expect(screen.getByRole('button', { name: '1' })).toHaveAttribute(
-      'data-active',
-      'true',
+    expect(screen.getByRole('button', { name: '1' })).toHaveClass(
+      styles.pagination,
+      styles.active,
     );
   });
 

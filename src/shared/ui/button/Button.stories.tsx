@@ -8,6 +8,13 @@ const meta = {
   args: {
     variant: 'primary',
     size: 'md',
+    radius: 'md',
+  },
+  argTypes: {
+    radius: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'pill'],
+    },
   },
 } satisfies Meta<typeof Button>;
 
@@ -38,6 +45,25 @@ export const WithIcon: Story = {
     children: 'Добавить',
     leftIcon: <span aria-hidden="true">+</span>,
   },
+};
+
+export const Radius: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+      <Button radius="sm" variant="secondary">
+        radius sm
+      </Button>
+      <Button radius="md" variant="secondary">
+        radius md
+      </Button>
+      <Button radius="lg" variant="secondary">
+        radius lg
+      </Button>
+      <Button radius="pill" variant="secondary">
+        radius pill
+      </Button>
+    </div>
+  ),
 };
 
 export const IconOnly: Story = {

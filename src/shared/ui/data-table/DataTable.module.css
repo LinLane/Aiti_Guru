@@ -1,0 +1,267 @@
+.wrapper {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.loadingCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: min(56rem, calc(100dvh - 18rem));
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.indeterminateProgress {
+  width: min(320px, 85%);
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: var(--color-bg-subtle);
+}
+
+.indeterminateProgress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 32%;
+  background-color: var(--color-bg-accent);
+  border-radius: 999px;
+  animation: dataTableIndeterminate 1.1s ease-in-out infinite;
+}
+
+@keyframes dataTableIndeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperLoading .table {
+  flex: 1;
+  min-height: 100%;
+}
+
+.wrapperLoading tbody {
+  height: 100%;
+}
+
+.wrapperLoading .loadingRow {
+  height: 100%;
+}
+
+.wrapperLoading .loadingCell {
+  height: 100%;
+  min-height: min(56rem, calc(100dvh - 18rem));
+  vertical-align: middle;
+}
+
+.table {
+  width: 100%;
+  min-width: max(720px, min-content);
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.headRow {
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.headCell {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sortActive {
+  color: var(--color-text-primary);
+}
+
+.sortLabel {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sortIcon {
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  opacity: 0.55;
+}
+
+.sortAsc,
+.sortDesc {
+  opacity: 1;
+}
+
+.bodyRow {
+  border-bottom: 1px solid var(--color-border-primary);
+  transition: background-color 0.2s ease;
+}
+
+.selectableRow {
+  cursor: pointer;
+}
+
+.selectedRow .bodyCell:first-child {
+  box-shadow: inset 3px 0 0 var(--color-border-accent);
+}
+
+.bodyRow:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.bodyCell {
+  padding: 16px;
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  vertical-align: middle;
+}
+
+.bodyCellLight {
+  font-weight: var(--font-weight-light);
+}
+
+.emptyRow,
+.loadingRow {
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.emptyCell {
+  padding: 32px 16px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.loadingCell {
+  padding: 0;
+  vertical-align: middle;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.selectionHeadCell,
+.selectionCell {
+  width: 56px;
+  padding-inline: 12px;
+}
+
+.footer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-surface);
+}
+
+.summary {
+  min-width: 0;
+}
+
+.summaryText {
+  margin: 0;
+  font-size: var(--font-size-18);
+  line-height: 1.35;
+  font-weight: var(--font-weight-light);
+}
+
+.summaryMuted {
+  color: var(--color-text-muted);
+}
+
+.summaryStrong {
+  color: var(--color-text-primary);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 1024px) {
+  .scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .stickyStartOnMobile {
+    position: sticky;
+    z-index: calc(1 + var(--data-table-sticky-layer, 0));
+    background-color: var(--color-bg-surface);
+    box-shadow: 4px 0 12px -6px rgb(0 0 0 / 0.12);
+  }
+
+  .headCell.stickyStartOnMobile {
+    z-index: calc(4 + var(--data-table-sticky-layer, 0));
+  }
+
+  .bodyRow:hover .bodyCell.stickyStartOnMobile,
+  .selectedRow .bodyCell.stickyStartOnMobile {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pager {
+    flex-wrap: wrap;
+  }
+}

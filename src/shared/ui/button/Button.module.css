@@ -3,24 +3,22 @@
   --button-bg-hover: var(--color-bg-subtle);
   --button-text: var(--color-text-primary);
   --button-border: var(--color-border-primary);
-  --button-radius: var(--control-radius);
-  --button-shadow-focus: 0 0 0 3px var(--color-border-accent);
+  --button-radius: var(--control-radius-md);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: var(--space-10);
 
   min-width: 0;
   border: 1px solid var(--button-border);
   border-radius: var(--button-radius);
-  background: var(--button-bg);
+  background-color: var(--button-bg);
   color: var(--button-text);
 
   font: inherit;
   font-weight: 500;
   line-height: 1;
-  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
@@ -34,12 +32,21 @@
 }
 
 .button:hover:not(:disabled) {
-  background: var(--button-bg-hover);
+  background-color: var(--button-bg-hover);
 }
 
-.button:focus-visible {
+.button:focus-visible:not(:disabled) {
   outline: none;
-  box-shadow: var(--button-shadow-focus);
+  border-color: var(--button-bg);
+  box-shadow: 0 0 0 2px var(--color-border-accent);
+}
+
+.button:focus-visible:hover:not(:disabled) {
+  border-color: var(--button-bg-hover);
+}
+
+.primary:focus-visible:not(:disabled) {
+  box-shadow: 0 0 0 2px var(--white);
 }
 
 .button:active:not(:disabled) {
@@ -49,70 +56,71 @@
 .button:disabled {
   cursor: not-allowed;
   color: var(--color-text-disabled);
-  background: var(--color-bg-disabled);
+  background-color: var(--color-bg-disabled);
   border-color: var(--color-border-disabled);
+  transform: none;
   box-shadow: none;
 }
 
-.button[data-size='sm'] {
-  min-height: 36px;
-  padding: 0 12px;
+.sm {
+  min-height: 27px;
+  padding-inline: 12px;
   font-size: 14px;
 }
 
-.button[data-size='md'] {
+.md {
   min-height: 44px;
-  padding: 0 16px;
+  padding-inline: 16px;
   font-size: 16px;
 }
 
-.button[data-size='lg'] {
-  min-height: 48px;
-  padding: 0 20px;
+.lg {
+  min-height: 54px;
+  padding-inline: var(--space-20);
   font-size: 18px;
 }
 
-.button[data-full-width='true'] {
-  width: 100%;
-}
-
-.button[data-shape='square'][data-size='sm'] {
+.square.sm {
   width: 36px;
   padding: 0;
 }
 
-.button[data-shape='square'][data-size='md'] {
+.square.md {
   width: 44px;
   padding: 0;
 }
 
-.button[data-shape='square'][data-size='lg'] {
+.square.lg {
   width: 48px;
   padding: 0;
 }
 
-.button[data-variant='primary'] {
+.square {
+  overflow: hidden;
+}
+
+.primary {
   --button-bg: var(--color-bg-accent);
   --button-bg-hover: var(--color-bg-accent-hover);
   --button-text: var(--color-text-on-accent);
   --button-border: transparent;
 }
 
-.button[data-variant='secondary'] {
+.secondary {
   --button-bg: var(--color-bg-surface);
   --button-bg-hover: var(--color-bg-subtle);
   --button-text: var(--color-text-primary);
   --button-border: var(--color-border-primary);
 }
 
-.button[data-variant='ghost'] {
+.ghost {
   --button-bg: transparent;
   --button-bg-hover: var(--color-bg-subtle);
   --button-text: var(--color-text-primary);
   --button-border: transparent;
 }
 
-.button[data-variant='pagination'] {
+.pagination {
   --button-bg: var(--color-bg-surface);
   --button-bg-hover: var(--color-bg-subtle);
   --button-text: var(--color-text-muted);
@@ -120,14 +128,30 @@
 
   min-width: 40px;
   min-height: 40px;
-  padding: 0 12px;
-  border-radius: var(--control-radius);
+  padding-inline: 12px;
 }
 
-.button[data-active='true'] {
+.pagination.active {
   --button-bg: var(--color-bg-accent-soft);
+  --button-bg-hover: var(--blue-400);
   --button-text: var(--color-text-on-accent);
   --button-border: transparent;
+}
+
+.loading {
+  opacity: 0.9;
+}
+
+.radiusSm {
+  --button-radius: var(--control-radius-sm);
+}
+
+.radiusLg {
+  --button-radius: var(--control-radius-lg);
+}
+
+.radiusPill {
+  --button-radius: var(--control-radius-pill);
 }
 
 .icon {
@@ -135,9 +159,26 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  line-height: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.icon img,
+.icon svg {
+  display: block;
+  border: none;
+  vertical-align: middle;
 }
 
 .label {
   display: inline-flex;
   align-items: center;
+}
+
+.button.fullWidth {
+  width: 100%;
 }
