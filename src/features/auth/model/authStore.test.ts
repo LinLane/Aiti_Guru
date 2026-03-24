@@ -104,7 +104,7 @@ describe('authStore', () => {
     expect(useAuthStore.getState().isAuthenticated).toBe(true);
   });
 
-  it('maps Invalid credentials to a Russian error message', async () => {
+  it('surfaces API error message for failed login', async () => {
     mockedApiClient.post.mockRejectedValue(
       new ApiError('Invalid credentials', 401, { message: 'Invalid credentials' }),
     );
@@ -121,6 +121,6 @@ describe('authStore', () => {
     }
 
     expect(caught).toBeDefined();
-    expect(getAuthErrorMessage(caught)).toBe('Неверный логин или пароль');
+    expect(getAuthErrorMessage(caught)).toBe('Invalid credentials');
   });
 });

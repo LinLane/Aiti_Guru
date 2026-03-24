@@ -121,7 +121,7 @@ export default function ProductsTable() {
                 header: 'Оценка',
                 cell: ({ row }) => {
                     const rating = row.original.rating;
-                    const isLowRating = rating < 3;
+                    const isLowRating = rating < 3.5;
                     return (
                         <span>
                             <span className={isLowRating ? styles.ratingDanger : undefined}>

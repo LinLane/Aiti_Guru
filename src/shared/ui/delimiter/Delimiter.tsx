@@ -16,8 +16,15 @@ export function Delimiter(props: DelimiterProps) {
       )}
       {...restProps}
     >
-      <span aria-hidden="true" className={styles.line} />
-      {text && <span className={styles.text}>{text}</span>}
+      {text ? (
+        <>
+          <span aria-hidden="true" className={styles.line} />
+          <span className={styles.text}>{text}</span>
+          <span aria-hidden="true" className={styles.line} />
+        </>
+      ) : (
+        <span aria-hidden="true" className={styles.line} />
+      )}
     </div>
   );
 }

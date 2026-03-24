@@ -35,21 +35,13 @@ const initialState: AuthStoreData = {
   isLoading: false,
 };
 
-function mapLoginApiMessage(message: string): string {
-  if (message.trim().toLowerCase() === 'invalid credentials') {
-    return 'Неверный логин или пароль';
-  }
-
-  return message;
-}
-
 export function getAuthErrorMessage(error: unknown): string {
   if (error instanceof ApiError) {
-    return mapLoginApiMessage(error.message);
+    return error.message;
   }
 
   if (error instanceof Error) {
-    return mapLoginApiMessage(error.message);
+    return error.message;
   }
 
   return 'Не удалось выполнить запрос';
